@@ -1,15 +1,29 @@
 package guava;
 
+import com.google.common.base.Predicate;
+import com.google.common.base.Predicates;
+import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.sun.xml.internal.ws.policy.AssertionValidationProcessor;
 import org.junit.Assert;
+
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by shiqining on 9/28/16.
  */
 public class GuavaStudy {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        Stopwatch stopwatch = Stopwatch.createStarted();
         testStrings();
+        System.out.println(stopwatch.toString());
         testStopwatch();
+        System.out.println(stopwatch.toString());
+        testPredicate();
+        System.out.println(stopwatch.toString());
     }
 
     public static void testStrings() {
@@ -20,6 +34,45 @@ public class GuavaStudy {
         Assert.assertEquals("xxx", Strings.repeat("x", 3));
     }
 
-    public static void testStopwatch() {
+    public static void testStopwatch() throws InterruptedException {
+        Stopwatch stopwatch = Stopwatch.createStarted();
+        TimeUnit.SECONDS.sleep(5);
+        stopwatch.stop();
+        Assert.assertEquals(5, stopwatch.elapsed(TimeUnit.SECONDS));
+        TimeUnit.SECONDS.sleep(1);
+        stopwatch.start();
+        TimeUnit.SECONDS.sleep(3);
+        Assert.assertEquals(8, stopwatch.elapsed(TimeUnit.SECONDS));
+    }
+
+    public static void testPredicate() {
+        List<String> stringList = Lists.newArrayList("first", "second", "third",
+                "four", "five", "six");
+        Assert.assertTrue(Lists.newArrayList(Iterables.filter(stringList,
+                Predicates.<String>alwaysFalse())).isEmpty());
+
+        Assert.assertEquals(stringList.size(), Lists.newArrayList(Iterables.
+                filter(stringList, Predicates.<String>alwaysTrue())).size());
+
+        Predicate<String> predicateFirst = new Predicate<String>() {
+            public boolean apply(String s) {
+                return "first".equals(s);
+            }
+        };
+
+        Predicate<String> predicateSecond = new Predicate<String>() {
+            public boolean apply(String s) {
+                return "second".equals(s);
+            }
+        };
+
+        Assert.assertEquals(1, Lists.newArrayList(Iterables.filter(stringList,
+                predicateFirst)).size());
+        Assert.assertEquals(5, Lists.newArrayList(Iterables.filter(stringList,
+                Predicates.not(predicateFirst))).size());
+        Assert.assertTrue(Lists.newArrayList(Iterables.filter(stringList,
+                Predicates.and(predicateFirst, predicateSecond))).isEmpty());
+        Assert.assertEquals(2, Lists.newArrayList(Iterables.filter(stringList,
+                Predicates.or(predicateFirst, predicateSecond))).size());
     }
 }
