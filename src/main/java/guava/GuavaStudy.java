@@ -1,9 +1,7 @@
 package guava;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
-import com.google.common.base.Stopwatch;
-import com.google.common.base.Strings;
+import com.google.common.base.*;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import org.junit.Assert;
@@ -23,6 +21,7 @@ public class GuavaStudy {
         System.out.println(stopwatch.toString());
         testPredicate();
         System.out.println(stopwatch.toString());
+        testJoiner();
     }
 
     public static void testStrings() {
@@ -73,6 +72,17 @@ public class GuavaStudy {
                 Predicates.and(predicateFirst, predicateSecond))).isEmpty());
         Assert.assertEquals(2, Lists.newArrayList(Iterables.filter(stringList,
                 Predicates.or(predicateFirst, predicateSecond))).size());
+    }
 
+    public static void testJoiner() {
+        String[] arr = {"a", "b", "c"};
+        Assert.assertEquals("a,b,c", Joiner.on(",").join(arr));
+        Assert.assertEquals("a,b,c", Joiner.on(",").skipNulls().join(new String[] {
+                "a", "b", null, "c", null
+        }));
+        Assert.assertEquals("a,b,none,c,none", Joiner.on(",").useForNull("none").join(new String[] {
+                "a", "b", null, "c", null
+        }));
+        Assert.assertEquals("a=1,b=2", Joiner.on(",").withKeyValueSeparator("=").join(ImmutableMap.of("a", 1, "b", 2)));
     }
 }
