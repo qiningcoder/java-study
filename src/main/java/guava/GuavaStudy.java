@@ -6,7 +6,6 @@ import com.google.common.base.Stopwatch;
 import com.google.common.base.Strings;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.sun.xml.internal.ws.policy.AssertionValidationProcessor;
 import org.junit.Assert;
 
 import java.util.List;
@@ -74,5 +73,6 @@ public class GuavaStudy {
                 Predicates.and(predicateFirst, predicateSecond))).isEmpty());
         Assert.assertEquals(2, Lists.newArrayList(Iterables.filter(stringList,
                 Predicates.or(predicateFirst, predicateSecond))).size());
+
     }
 }
