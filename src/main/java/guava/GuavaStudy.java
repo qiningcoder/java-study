@@ -1,9 +1,9 @@
 package guava;
 
 import com.google.common.base.*;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import com.sun.xml.internal.ws.policy.AssertionValidationProcessor;
 import org.junit.Assert;
 
 import java.util.List;
@@ -22,6 +22,7 @@ public class GuavaStudy {
         testPredicate();
         System.out.println(stopwatch.toString());
         testFunction();
+        testJoiner();
     }
 
     public static void testStrings() {
@@ -81,7 +82,18 @@ public class GuavaStudy {
             }
         };
         List<Integer> integers = Lists.newArrayList(1, 2, 3, 4, 5);
-        List<String> results = Lists.transform(integers,f);
+        List<String> results = Lists.transform(integers, f);
         Assert.assertEquals(5, results.size());
+    }
+    public static void testJoiner() {
+        String[] arr = {"a", "b", "c"};
+        Assert.assertEquals("a,b,c", Joiner.on(",").join(arr));
+        Assert.assertEquals("a,b,c", Joiner.on(",").skipNulls().join(new String[] {
+                "a", "b", null, "c", null
+        }));
+        Assert.assertEquals("a,b,none,c,none", Joiner.on(",").useForNull("none").join(new String[] {
+                "a", "b", null, "c", null
+        }));
+        Assert.assertEquals("a=1,b=2", Joiner.on(",").withKeyValueSeparator("=").join(ImmutableMap.of("a", 1, "b", 2)));
     }
 }
