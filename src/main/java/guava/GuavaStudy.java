@@ -21,6 +21,7 @@ public class GuavaStudy {
         System.out.println(stopwatch.toString());
         testPredicate();
         System.out.println(stopwatch.toString());
+        testFunction();
         testJoiner();
     }
 
@@ -74,6 +75,16 @@ public class GuavaStudy {
                 Predicates.or(predicateFirst, predicateSecond))).size());
     }
 
+    public static void testFunction() {
+        Function<Integer, String> f = new Function<Integer, String>() {
+            public String apply(Integer integer) {
+                return String.valueOf(integer);
+            }
+        };
+        List<Integer> integers = Lists.newArrayList(1, 2, 3, 4, 5);
+        List<String> results = Lists.transform(integers, f);
+        Assert.assertEquals(5, results.size());
+    }
     public static void testJoiner() {
         String[] arr = {"a", "b", "c"};
         Assert.assertEquals("a,b,c", Joiner.on(",").join(arr));
