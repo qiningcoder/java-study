@@ -5,9 +5,10 @@ import org.springframework.beans.factory.BeanNameAware;
 /**
  * Created by shiqining on 10/31/16.
  */
-public abstract class Animal implements BeanNameAware {
+public abstract class Animal {
     protected String name;
     protected int speed;
+
 
     public String desc() {
         return "I'm a " + name + ", my speed is " + speed + "km/h";
@@ -27,9 +28,5 @@ public abstract class Animal implements BeanNameAware {
 
     public void setSpeed(int speed) {
         this.speed = speed;
-    }
-
-    public void setBeanName(String name) {
-        System.out.println("====name=" + name);
     }
 }
