@@ -11,8 +11,9 @@ import java.util.Arrays;
 public class SpringStart {
     public static void main(String[] args) {
         XmlBeanFactory xmlBeanFactory = new XmlBeanFactory(new ClassPathResource("spring/spring-beans.xml"));
-        MyPostBeanProcessor myPostBeanProcessor = new MyPostBeanProcessor();
-        xmlBeanFactory.addBeanPostProcessor(myPostBeanProcessor);
+        //MyPostBeanProcessor myPostBeanProcessor = new MyPostBeanProcessor();
+        MyInstantiationBeanPostProcessor myInstantiationBeanPostProcessor = new MyInstantiationBeanPostProcessor();
+        xmlBeanFactory.addBeanPostProcessor(myInstantiationBeanPostProcessor);
         Dog dog = (Dog) xmlBeanFactory.getBean("dog");
     }
 }

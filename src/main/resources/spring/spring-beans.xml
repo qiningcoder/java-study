@@ -7,6 +7,8 @@
         <!--<property name="speed" value="10"/>-->
     <!--</bean>-->
 
+    <!--<bean id="myInstantiationBeanPostProcessor" class="spring.bean.MyInstantiationBeanPostProcessor"/>-->
+
     <!--<bean id="myPostBeanProcessor" class="spring.bean.MyPostBeanProcessor"/>-->
 
     <!--<bean id="horse" class="spring.bean.Horse">-->
