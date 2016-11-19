@@ -36,4 +36,7 @@
     <bean id="myBeanFactoryPostProcessor" class="spring.bean.MyBeanFactoryPostProcessor"/>
 
     <bean id="myBeanDefinitionRegistryPostProcessor" class="spring.bean.MyBeanDefinitionRegistryPostProcessor"/>
+
+    <!--spring context listener-->
+    <bean id="myListener" class="spring.bean.MyListener"/>
 </beans>
