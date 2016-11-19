@@ -2,10 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <bean id="dog" class="spring.bean.Dog" init-method="initMethod">
-        <property name="name" value="dog"/>
-        <property name="speed" value="10"/>
-    </bean>
+    <!--<bean id="dog" class="spring.bean.Dog" init-method="initMethod">-->
+        <!--<property name="name" value="dog"/>-->
+        <!--<property name="speed" value="10"/>-->
+    <!--</bean>-->
 
     <!--<bean id="myPostBeanProcessor" class="spring.bean.MyPostBeanProcessor"/>-->
 
@@ -17,4 +17,23 @@
     <!--<bean id="person" class="spring.bean.Person">-->
         <!--<property name="pet" ref="dog"/>-->
     <!--</bean>-->
+
+    <bean id="userManager" class="spring.bean.UserManager">
+        <property name="dateValue">
+            <value>2016-04-12</value>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+               <entry key="java.util.Date" value="spring.bean.DatePropertyEditor">
+               </entry>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="myBeanFactoryPostProcessor" class="spring.bean.MyBeanFactoryPostProcessor"/>
+
+    <bean id="myBeanDefinitionRegistryPostProcessor" class="spring.bean.MyBeanDefinitionRegistryPostProcessor"/>
 </beans>
