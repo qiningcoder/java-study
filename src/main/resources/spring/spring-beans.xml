@@ -41,4 +41,8 @@
 
     <!--spring context listener-->
     <bean id="myListener" class="spring.bean.MyListener"/>
+
+    <bean id="myLifecycleBean" class="spring.bean.MyLifecycleBean">
+        <constructor-arg name="name" value="I am a LifecycleBean"/>
+    </bean>
 </beans>
