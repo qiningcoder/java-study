@@ -3,7 +3,7 @@ package spring.aop;
 /**
  * Created by qiningshi on 16-11-22.
  */
-public class TestBean {
+public class TestBean implements TestInterface, TestInterface2 {
     private String testStr = "testStr";
 
     public String getTestStr() {
@@ -16,5 +16,14 @@ public class TestBean {
 
     public void test() {
         System.out.println("=test=");
+    }
+
+    public void test2() {
+
+    }
+
+    @Override
+    public void test1() {
+
     }
 }
