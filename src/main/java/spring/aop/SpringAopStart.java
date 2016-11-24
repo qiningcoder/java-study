@@ -11,7 +11,6 @@ public class SpringAopStart {
         ApplicationContext applicationContext = new MyClassPathXmlApplicationContext("spring/spring-aop.xml");
         TestInterface testBean = (TestInterface) applicationContext.getBean("testBean");
         testBean.test1();
-        TestInterface2 testInterface2 = (TestInterface2) testBean;
-        testInterface2.test2();
+
     }
 }
