@@ -52,4 +52,8 @@
     <bean id="userService" class="spring.jdbc.UserService">
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
+
+    <bean id="propagationService" class="spring.jdbc.PropagationService">
+        <property name="userService" ref="userService"/>
+    </bean>
 </beans>

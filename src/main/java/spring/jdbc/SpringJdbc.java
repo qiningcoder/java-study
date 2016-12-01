@@ -3,21 +3,21 @@ package spring.jdbc;
 import org.springframework.context.ApplicationContext;
 import spring.bean.MyClassPathXmlApplicationContext;
 
-import java.util.Map;
-
 /**
  * Created by shiqining on 11/21/16.
  */
 public class SpringJdbc {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new MyClassPathXmlApplicationContext("spring/spring-h2db.xml");
-        UserService userService = (UserService) applicationContext.getBean("userService");
+        PropagationService propagationService = (PropagationService) applicationContext.getBean("propagationService");
         try {
-            userService.insert("shiqiwei", 14);
-        } catch (RuntimeException e) {
+            propagationService.insertTwo("sqn", 24, "sqw", 13);
+        } catch (Exception e) {
             System.out.println(e);
         }
-        Map<String, Object> map = userService.query("shiqiwei");
-        System.out.println(map);
+
+        UserService userService = (UserService) applicationContext.getBean("userService");
+        System.out.println(userService.query("sqn"));
+        System.out.println(userService.query("sqw"));
     }
 }
